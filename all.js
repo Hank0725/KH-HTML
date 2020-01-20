@@ -2609,14 +2609,18 @@ var one    = document.querySelector(".one");
 var two    = document.querySelector(".two");
 var three  = document.querySelector(".three");
 var four   = document.querySelector(".four");    
+const pagelist = document.getElementById("pagelist");
+
 // 篩選出不重複資料
 const set = new Set();
 const newZone = data.filter(item => !set.has(item.Zone) ? set.add(item.Zone) : false);
+
 //新增不重複陣列
 var dataoption =[];    
  for (let i = 0; i< newZone.length; i++){
        dataoption.push(newZone[i].Zone);
         }
+
 //下拉式選單匯入子元素option
  for (let i = 0; i < dataoption.length; i++) {
      const str = document.createElement('option');
@@ -2625,6 +2629,7 @@ var dataoption =[];
  }
 //監聽區域選項按鈕變更
 optionlist.addEventListener("change",gooption,false);
+
 //change區域選項函式
 function gooption(e){
     list.innerHTML = "" ;
@@ -2637,8 +2642,10 @@ function gooption(e){
     document.querySelector("#text").textContent = area+newData.length+"筆" ;
     newstr += '<div class="spot"><div class="spotbox clearfix"><img class="spotimg" src="'+data[i].Picture1+'" alt="'+data[i].Name+'"><span class="Name">'+data[i].Name+'</span><span class="Zone">'+data[i].Zone+'</span><p class="Opentime"><img class="timeicon" src="https://github.com/Hank0725/KH-HTML/blob/master/JavaScript_HomeWork-gh-pages/assets/icons_clock.png?raw=true">'+data[i].Opentime+'</p><p class="Add"><img class="icon" src="https://github.com/Hank0725/KH-HTML/blob/master/JavaScript_HomeWork-gh-pages/assets/icons_pin.png?raw=true">'+data[i].Add+'</p><p class="Tel"><img class="icon" src="https://github.com/Hank0725/KH-HTML/blob/master/JavaScript_HomeWork-gh-pages/assets/icons_phone.png?raw=true">'+data[i].Tel+'</p><span class="Ticketinfo"><img class="icon" src="https://github.com/Hank0725/KH-HTML/blob/master/JavaScript_HomeWork-gh-pages/assets/icons_tag.png?raw=true">'+data[i].Ticketinfo+'</span></div></div>';
     list.innerHTML =  newstr;   }}} 
+
 //監聽區域按鈕變更
 hotzone.addEventListener("click",goarea,false);
+
 //熱門區域按鈕函式
 function goarea(e){
     list.innerHTML = "" ;
@@ -2653,8 +2660,47 @@ function goarea(e){
     list.innerHTML =  newstr;   }}
    } 
 
+//新增回上層按鈕
 var back = document.querySelector(".back");
 back.addEventListener("click",clicktop,false);
 function clicktop(){
  window.scroll(0,0)
 } 
+
+//新增page按鈕
+
+// 用物件方式來傳遞資料
+let currentPage = 4;
+let pageData = [];
+const page = {
+    dataoption,
+    currentPage,
+    hasPage: currentPage > 1,
+    hasNext: currentPage < dataoption,
+  }
+  pageData.push(page);
+  pagination(pageData);
+ 
+  
+
+function pagination(pageData) {
+    // 取得資料長度
+    const pageTotal = dataoption.length;
+  
+    // 要顯示在畫面上的資料數量，預設每一頁只顯示五筆資料。
+    const perpage = 5;
+    console.log(`全部資料:${pageTotal} 每一頁顯示:${perpage}筆`);
+    pageBtn(pageData);
+  }
+
+  function pageBtn (pageTotal){
+    let str = '';
+    const total = page.pageTotal;
+    
+    for(let i = 0; i < total; i++){
+      str +=`<li class="page-item"><a class="page-link" href="#">${i}</a></li>`;
+    };
+   
+    pagelist.innerHTML = str;
+  }
+  
