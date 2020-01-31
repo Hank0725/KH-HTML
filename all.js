@@ -2600,6 +2600,11 @@ Travellinginfo: "",
 _id: 98,
 }]
 
+var xhr = XMLHttpRequest();
+xhr.open('get','',true);
+xhr.send(null);
+
+
 var optionlist = document.querySelector(".optionlist");
 var option = document.querySelector(".option")
 var hotzone = document.querySelector(".hotzone");
