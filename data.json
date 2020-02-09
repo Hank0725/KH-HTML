@@ -1,5 +1,5 @@
-var data = 
-    [{
+
+    {
     Ticketinfo: "免費參觀",
     Zone: "三民區",
     Px: "120.30211",
@@ -2597,4 +2597,4 @@ var data =
     Picdescribe1: "內惟埤文化園區",
     Travellinginfo: "",
     _id: 98,
-    }]
+    }
