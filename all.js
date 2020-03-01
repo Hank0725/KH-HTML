@@ -8,7 +8,6 @@ var four = document.querySelector(".four");
 
 
 //連結JSON檔案
-
 let xhr = new XMLHttpRequest();
 xhr.open("get", "https://data.kcg.gov.tw/api/action/datastore_search?resource_id=92290ee5-6e61-456f-80c0-249eae2fcc97", true);
 xhr.setRequestHeader('Content-type', 'application/json');
@@ -21,7 +20,6 @@ xhr.onload = function () {
         zone.push(data.result.records[i].Zone);
     };
     //新增不重複陣列
-
     // 再用 foreach 去判斷陣列裡面所有值是否有吻合
     var dataoption = [];
     zone.forEach(function (value) {
@@ -31,7 +29,6 @@ xhr.onload = function () {
     });
 
     //宣告各個節點的變數
-
     var optionlist = document.querySelector(".optionlist");
     var hotzone = document.querySelector(".hotzone");
     var datalen = data.result.records.length
@@ -41,6 +38,7 @@ xhr.onload = function () {
         str.textContent = dataoption[i];
         optionlist.appendChild(str);
     }
+
     //監聽區域選項按鈕變更
     optionlist.addEventListener("change", gooption, false);
     //監聽區域按鈕變更
@@ -55,7 +53,6 @@ xhr.onload = function () {
         for (let i = 0; i < datalen; i++) {
             if (data.result.records[i].Zone == area) {
                 newdata.push(data.result.records[i].Zone);
-                console.log(newdata);
                 document.querySelector("#text").textContent = data.result.records[i].Zone + data.result.records[i].Zone.length + "筆";
                 newstr += '<div class="spot"><div class="spotbox clearfix"><img class="spotimg" src="' + data.result.records[i].Picture1 + '" alt="' + data.result.records[i].Name + '"><span class="Name">' + data.result.records[i].Name + '</span><span class="Zone">' + data.result.records[i].Zone + '</span><p class="Opentime"><img class="timeicon" src="https://github.com/Hank0725/KH-HTML/blob/master/JavaScript_HomeWork-gh-pages/assets/icons_clock.png?raw=true">' + data.result.records[i].Opentime + '</p><p class="Add"><img class="icon" src="https://github.com/Hank0725/KH-HTML/blob/master/JavaScript_HomeWork-gh-pages/assets/icons_pin.png?raw=true">' + data.result.records[i].Add + '</p><p class="Tel"><img class="icon" src="https://github.com/Hank0725/KH-HTML/blob/master/JavaScript_HomeWork-gh-pages/assets/icons_phone.png?raw=true">' + data.result.records[i].Tel + '</p><span class="Ticketinfo"><img class="icon" src="https://github.com/Hank0725/KH-HTML/blob/master/JavaScript_HomeWork-gh-pages/assets/icons_tag.png?raw=true">' + data.result.records[i].Ticketinfo + '</span></div></div>';
                 list.innerHTML = newstr;
@@ -79,6 +76,7 @@ xhr.onload = function () {
         }
     }
 }
+
 var back = document.querySelector(".back");
 back.addEventListener("click", clicktop, false);
 function clicktop() {
